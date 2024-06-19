@@ -1,32 +1,36 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UsersService } from '../users/users.service';
+import { UserRepository } from '../user/user.repository';
+import { InjectRepository } from '@nestjs/typeorm';
+import { RegisterDto } from '../user/dto/register.dto';
+import { LoginDto } from '../user/dto/login.dto';
+import * as bcrypt from 'bcryptjs';
+import { UnauthorizedException } from '@nestjs/common';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly usersService: UsersService,
+    @InjectRepository(UserRepository) // Ensure correct injection here
+    private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findUserByUsername(username);
-    if (user && user.password === pass) {
-      const { password, ...result } = user;
-      return result;
+  async register(registerDto: RegisterDto) {
+    const { email, password, fullName } = registerDto;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await this.userRepository.createUser(email, hashedPassword, fullName);
+  }
+
+  async login(loginDto: LoginDto): Promise<{ accessToken: string }> {
+    const { email, password } = loginDto;
+    const user = await this.userRepository.findOne({ where: { email } });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      const payload = { email };
+      const accessToken = this.jwtService.sign(payload);
+      return { accessToken };
+    } else {
+      throw new UnauthorizedException('Invalid credentials');
     }
-    return null;
-  }
-
-  async login(user: any) {
-    const payload = { username: user.username, sub: user.userId };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
-  }
-
-  async register(username: string, password: string) {
-    return this.usersService.create(username, password);
   }
 }
