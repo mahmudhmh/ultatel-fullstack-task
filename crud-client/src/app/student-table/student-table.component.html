@@ -1,0 +1,94 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="text-center mb-4">Student Management</h2>
+      <div class="form-row mb-3">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Name"
+            [(ngModel)]="filters.name"
+          />
+        </div>
+        <div class="col">
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Age"
+            [(ngModel)]="filters.age"
+          />
+        </div>
+        <div class="col">
+          <ng-select
+            [items]="countries"
+            [(ngModel)]="filters.country"
+            placeholder="Country"
+          ></ng-select>
+        </div>
+        <div class="col">
+          <ng-select
+            [items]="genders"
+            [(ngModel)]="filters.gender"
+            placeholder="Gender"
+          ></ng-select>
+        </div>
+        <div class="col">
+          <button class="btn btn-primary w-100" (click)="search()">
+            Search
+          </button>
+        </div>
+        <div class="col">
+          <button class="btn btn-secondary w-100" (click)="resetFilters()">
+            Reset
+          </button>
+        </div>
+      </div>
+      <button class="btn btn-success mb-3" (click)="openStudentModal()">
+        Add New Student
+      </button>
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th (click)="sort('firstName')">Name</th>
+            <th (click)="sort('age')">Age</th>
+            <th (click)="sort('country')">Country</th>
+            <th (click)="sort('gender')">Gender</th>
+            <th (click)="sort('email')">Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of paginatedStudents">
+            <td>{{ student.firstName + " " + student.lastName }}</td>
+            <td>{{ student.age }}</td>
+            <td>{{ student.country }}</td>
+            <td>{{ student.gender }}</td>
+            <td>{{ student.email }}</td>
+            <td>
+              <button
+                class="btn btn-primary btn-sm"
+                (click)="openStudentModal(student)"
+              >
+                Edit
+              </button>
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="deleteStudent(student.id)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ngb-pagination
+        [collectionSize]="students.length"
+        [(page)]="currentPage"
+        [pageSize]="pageSize"
+        (pageChange)="paginate()"
+        class="d-flex justify-content-center mt-4"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

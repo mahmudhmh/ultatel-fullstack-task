@@ -1,0 +1,86 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ student ? "Edit" : "Add" }} Student</h4>
+  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #studentForm="ngForm">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        [(ngModel)]="student.firstName"
+        name="firstName"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        [(ngModel)]="student.lastName"
+        name="lastName"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        [(ngModel)]="student.email"
+        name="email"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <ng-select
+        [items]="genders"
+        [(ngModel)]="student.gender"
+        name="gender"
+        required
+      ></ng-select>
+    </div>
+    <div class="form-group">
+      <label for="country">Country</label>
+      <ng-select
+        [items]="countries"
+        [(ngModel)]="student.country"
+        name="country"
+        required
+      ></ng-select>
+    </div>
+    <div class="form-group">
+      <label for="age">Birth Date</label>
+      <input
+        type="text"
+        class="form-control"
+        id="age"
+        [(ngModel)]="student.age"
+        name="age"
+        ngbDatepicker
+        required
+      />
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="dismiss()">
+    Cancel
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="save()"
+    [disabled]="!studentForm.valid"
+  >
+    Save
+  </button>
+</div>
