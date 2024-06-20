@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { StudentService } from '../services/student.service';
+import { StudentService } from '../../services/student.service';
 import Swal from 'sweetalert2';
 import { StudentModalComponent } from '../student-modal/student-modal.component';
 import { CommonModule } from '@angular/common';
