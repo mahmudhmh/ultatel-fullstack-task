@@ -1,13 +1,37 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
+import { StudentService } from './services/student.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 @Component({
-  selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  imports: [
+    RouterModule,
+    CommonModule,
+    HttpClientModule,
+    RouterOutlet,
+    NgSelectModule,
+  ],
+  providers: [AuthService, AuthGuard, StudentService],
 })
 export class AppComponent {
-  title = 'crud-client';
+  title = 'ultatel-frontend';
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }
