@@ -1,5 +1,10 @@
 # ULTATEL Full-Stack Task.
 
+## Overview
+
+a simple CRUD application where users can register, log in, create, edit, and delete student. The
+application should have a user-friendly interface and secure backend.
+
 ## Features
 
 - User authentication with secure password handling.
