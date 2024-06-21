@@ -31,7 +31,8 @@
           "configurations": {
             "production": {
               "outputPath": "dist/browser",
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/"
             },
             "development": {
               "optimization": false,
