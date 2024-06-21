@@ -7,7 +7,8 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class StudentService {
-  private baseUrl = 'http://localhost:3000/students';
+  private baseUrl =
+    'https://ultatel-fullstack-task-server.onrender.com/students';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 

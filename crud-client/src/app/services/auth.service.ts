@@ -11,7 +11,7 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:3000/auth';
+  private baseUrl = 'https://ultatel-fullstack-task-server.onrender.com/auth';
   private token: string | null = null;
 
   constructor(private http: HttpClient) {}
