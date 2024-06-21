@@ -104,6 +104,12 @@ application should have a user-friendly interface and secure backend.
 
 - MySQL.
 
+### Demo Video
+
+
+### Application Screens
+
+
 ### Note
 
 Ensure that your frontend is hosted on port 4200. If you change the port, update the CORS settings in your `.env` file accordingly.
