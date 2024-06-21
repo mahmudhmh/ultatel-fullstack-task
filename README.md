@@ -106,8 +106,14 @@ application should have a user-friendly interface and secure backend.
 
 ### Demo Video
 
+- Watch the demo video on YouTube: [ULTATEL Task Demo Video](https://www.youtube.com/embed/XLCnzPHDDUM)
+
+[![Watch the video](https://img.youtube.com/vi/XLCnzPHDDUM/0.jpg)](https://www.youtube.com/watch?v=XLCnzPHDDUM "ULTATEL Task Demo Video")
+
 
 ### Application Screens
+
+- [Screen Shots](https://drive.google.com/drive/folders/1LBVB23xv3-qfR_X6jd1l7tsJup0NtfPz?usp=sharing)
 
 
 ### Note
