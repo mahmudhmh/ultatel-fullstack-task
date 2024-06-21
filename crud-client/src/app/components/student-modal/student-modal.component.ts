@@ -78,7 +78,7 @@ export class StudentModalComponent {
             title: 'Success',
             text: `Student: ${
               this.student.firstName + ' ' + this.student.lastName
-            } Saved Successfully, Happy Editing!`,
+            } saved successfully.`,
             confirmButtonColor: '#00a2e7',
             confirmButtonText: 'Continue',
             timer: 3000,
@@ -91,7 +91,7 @@ export class StudentModalComponent {
             title: 'Error',
             text: `Student: ${
               this.student.firstName + ' ' + this.student.lastName
-            } Cannot be edited, Try Again!`,
+            } could not be edited. Try again.`,
             confirmButtonColor: '#ff0000',
             confirmButtonText: 'Try again',
             timer: 2000,
@@ -106,7 +106,7 @@ export class StudentModalComponent {
             title: 'Success',
             text: `Student: ${
               this.student.firstName + ' ' + this.student.lastName
-            } Added Successfully, Add More Love More!`,
+            } added successfully.`,
             confirmButtonColor: '#00a2e7',
             confirmButtonText: 'Continue',
             timer: 3000,
@@ -119,7 +119,7 @@ export class StudentModalComponent {
             title: 'Error',
             text: `Student: ${
               this.student.firstName + ' ' + this.student.lastName
-            } Cannot be Added, Try Again!`,
+            } could not be added. Try again.`,
             confirmButtonColor: '#ff0000',
             confirmButtonText: 'Try again',
             timer: 2000,

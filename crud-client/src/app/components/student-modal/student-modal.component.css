@@ -9,10 +9,6 @@
   display: none;
 }
 
-.modal {
-  z-index: 1050;
-}
-
 body.modal-open .modal-overlay {
   display: block;
 }
@@ -72,13 +68,16 @@ body.modal-open .modal-overlay {
 
 .ng-select .ng-select-container {
   border-radius: 0.375rem;
-  border: 1px solid #ced4da !important;
-  min-height: 38px;
-  background-color: #f8f9fa !important;
+  border: 1px solid #ced4da;
+  min-height: 50px;
+  background-color: #f8f9fa;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.375rem 1.25rem;
 }
 
 .ng-select .ng-select-container .ng-value-container {
-  padding: 0.375rem 1.25rem;
+  padding: 0;
   font-size: 1rem;
 }
 
@@ -99,36 +98,32 @@ body.modal-open .modal-overlay {
 
 .ng-select .ng-dropdown-panel {
   border-radius: 0.375rem;
-  border: 1px solid #ced4da !important;
+  border: 1px solid #ced4da;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   max-height: 200px;
   overflow-y: auto;
-  background-color: #ffffff !important;
+  background-color: #ffffff;
 }
 
 .ng-select .ng-option {
   padding: 0.375rem 1.25rem;
   font-size: 1rem;
   cursor: pointer;
-  background-color: #ffffff !important;
-  color: #000 !important;
+  background-color: #ffffff;
+  color: #000;
 }
 
 .ng-select .ng-option:hover {
-  background-color: #f8f9fa !important;
+  background-color: #f8f9fa;
 }
 
 .ng-select .ng-option.selected {
-  background-color: #007bff !important;
-  color: #ffffff !important;
+  background-color: #007bff;
+  color: #ffffff;
 }
 
 .ng-select .ng-option.disabled {
-  background-color: #e9ecef !important;
-}
-
-.ng-select .ng-dropdown-panel .ng-option .ng-option-mark {
-  display: none;
+  background-color: #e9ecef;
 }
 
 .modal-footer {
@@ -158,25 +153,25 @@ body.modal-open .modal-overlay {
 }
 
 ::ng-deep .ng-select .ng-select-container {
-  background-color: #f8f9fa !important;
-  border: 1px solid #ced4da !important;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
 }
 
 ::ng-deep .ng-select .ng-dropdown-panel {
-  background-color: #ffffff !important;
-  border: 1px solid #ced4da !important;
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
 }
 
 ::ng-deep .ng-select .ng-option {
-  background-color: #ffffff !important;
-  color: #000 !important;
+  background-color: #ffffff;
+  color: #000;
 }
 
 ::ng-deep .ng-select .ng-option:hover {
-  background-color: #f8f9fa !important;
+  background-color: #f8f9fa;
 }
 
 ::ng-deep .ng-select .ng-option.selected {
-  background-color: #007bff !important;
-  color: #ffffff !important;
+  background-color: #007bff;
+  color: #ffffff;
 }
