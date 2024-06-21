@@ -10,7 +10,7 @@ import { AuthController } from './auth.controller';
   imports: [
     PassportModule,
     JwtModule.register({
-      secret: 'hamada-yl3b-hamada-yksb',
+      secret: process.env.JWTSECRET || 'default-secret-lol',
       signOptions: { expiresIn: '1d' },
     }),
     forwardRef(() => UserModule),
