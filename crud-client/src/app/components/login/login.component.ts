@@ -22,11 +22,25 @@ export class LoginComponent {
   onSubmit() {
     this.authService.login(this.email, this.password).subscribe(
       (response) => {
-        Swal.fire('Success', 'Logged in successfully', 'success');
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: `Welcome ${this.email}, you are logged in!`,
+          confirmButtonColor: '#00a2e7',
+          confirmButtonText: 'Continue',
+          timer: 2000,
+        });
         this.router.navigate(['/home']);
       },
       (error) => {
-        Swal.fire('Error', 'Invalid credentials', 'error');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Invalid email or password',
+          confirmButtonColor: '#ff0000',
+          confirmButtonText: 'Try again',
+          timer: 2000,
+        });
       }
     );
   }

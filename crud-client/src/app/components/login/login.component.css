@@ -1,0 +1,35 @@
+:host {
+  font-family: "Arial", sans-serif;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input[type="email"],
+input[type="password"] {
+  border-radius: 0.6rem;
+  border: 1px solid #ced4da;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-bottom-color: #00a2e7;
+  box-shadow: 0 0 0 0.2rem rgba(0, 162, 231, 0.25);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.btn-primary {
+  background-color: #00a2e7;
+  border: none;
+}
+
+a {
+  color: #00a2e7;
+}
+
+a:hover {
+  color: #1085b8;
+}

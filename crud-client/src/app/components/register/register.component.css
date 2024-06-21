@@ -1,0 +1,116 @@
+:host {
+  font-family: "Arial", sans-serif;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  border-radius: 0.6rem;
+  border: 1px solid #ced4da;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+  border-bottom-color: #00a2e7;
+  box-shadow: 0 0 0 0.2rem rgba(0, 162, 231, 0.25);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.btn-primary {
+  background-color: #00a2e7;
+  border: none;
+}
+
+a {
+  color: #00a2e7;
+}
+
+a:hover {
+  color: #1085b8;
+}
+
+.tooltip-custom {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: none;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.tooltip-custom.show {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+.password-requirements {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.password-requirements li {
+  margin: 5px 0;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+}
+
+.password-requirements li.valid::before {
+  content: "✔";
+  color: #1c9f1c;
+  margin-right: 8px;
+}
+
+.password-requirements li::before {
+  content: "✖";
+  color: #c03434;
+  margin-right: 8px;
+}
+
+.password-strength {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.password-strength div {
+  padding: 5px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.very-weak {
+  background-color: #ff6666;
+  color: #c03434;
+}
+
+.weak {
+  background-color: #ffcc66;
+  color: #a17419;
+}
+
+.medium {
+  background-color: #ffeb66;
+  color: #9c890e;
+}
+
+.strong {
+  background-color: #66ff66;
+  color: #1c9f1c;
+}

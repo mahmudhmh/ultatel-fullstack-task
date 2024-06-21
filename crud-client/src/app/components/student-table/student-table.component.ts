@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
   standalone: true,
   selector: 'app-student-table',
   templateUrl: './student-table.component.html',
+  styleUrls: ['./student-table.component.css'],
   imports: [
     CommonModule,
     FormsModule,
@@ -27,6 +28,8 @@ export class StudentTableComponent implements OnInit {
   paginatedStudents: any[] = [];
   currentPage = 1;
   pageSize = 10;
+  totalPages = 0;
+  pages: number[] = [];
   filters = { name: '', age: null, country: '', gender: '' };
   sortField = '';
   sortOrder = '';
@@ -41,12 +44,15 @@ export class StudentTableComponent implements OnInit {
 
   ngOnInit() {
     this.loadStudents();
-    this.paginate();
   }
 
   loadStudents() {
     this.studentService.getStudents().subscribe(
-      (data) => (this.students = data),
+      (data) => {
+        this.students = data;
+        this.updatePages();
+        this.paginate();
+      },
       (error) => Swal.fire('Error', 'Failed to load students', 'error')
     );
   }
@@ -65,6 +71,16 @@ export class StudentTableComponent implements OnInit {
     this.loadStudents();
     this.search();
   }
+
+  getSortIcon(field: string): string {
+    if (this.sortField === field) {
+      return this.sortOrder === 'asc'
+        ? 'bi bi-caret-up-fill'
+        : 'bi bi-caret-down-fill';
+    }
+    return '';
+  }
+
   sort(field: string) {
     if (this.sortField === field) {
       this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
@@ -98,6 +114,20 @@ export class StudentTableComponent implements OnInit {
         return (valueA < valueB ? -1 : 1) * (this.sortOrder === 'asc' ? 1 : -1);
       })
       .slice(start, end);
+    this.updatePages();
+  }
+
+  updatePages() {
+    this.totalPages = Math.ceil(this.students.length / this.pageSize);
+    this.pages = Array(this.totalPages)
+      .fill(0)
+      .map((x, i) => i + 1);
+  }
+
+  setPage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.paginate();
   }
 
   openStudentModal(student: any = null) {
@@ -132,7 +162,6 @@ export class StudentTableComponent implements OnInit {
   }
 
   deleteStudent(studentId: number) {
-    // Call studentService to delete student and refresh table
     Swal.fire({
       title: 'Are you sure?',
       text: 'You will not be able to recover this student!',

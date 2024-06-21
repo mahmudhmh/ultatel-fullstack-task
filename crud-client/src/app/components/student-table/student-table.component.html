@@ -1,9 +1,17 @@
-<div class="container mt-5">
-  <div class="card">
+<div class="container mt-2">
+  <!-- Filter Section -->
+  <div class="card shadow mb-3">
     <div class="card-body">
-      <h2 class="text-center mb-4">Student Management</h2>
-      <div class="form-row mb-3">
-        <div class="col">
+      <h3 class="text-start mt-1">Students CRUD</h3>
+      <button
+        class="btn btn-success mb-2 float-end"
+        (click)="openStudentModal()"
+      >
+        Add New Student
+      </button>
+      <div class="clearfix"></div>
+      <div class="row mb-3">
+        <div class="col-md-3">
           <input
             type="text"
             class="form-control"
@@ -11,7 +19,7 @@
             [(ngModel)]="filters.name"
           />
         </div>
-        <div class="col">
+        <div class="col-md-2">
           <input
             type="number"
             class="form-control"
@@ -19,47 +27,130 @@
             [(ngModel)]="filters.age"
           />
         </div>
-        <div class="col">
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-md-3">
           <ng-select
             [items]="countries"
             [(ngModel)]="filters.country"
             placeholder="Country"
+            [searchable]="false"
+            [clearable]="false"
+            class="country-select"
           ></ng-select>
         </div>
-        <div class="col">
+        <div class="col-md-2">
           <ng-select
             [items]="genders"
             [(ngModel)]="filters.gender"
             placeholder="Gender"
+            [searchable]="false"
+            [clearable]="false"
+            class="gender-select"
           ></ng-select>
         </div>
-        <div class="col">
-          <button class="btn btn-primary w-100" (click)="search()">
-            Search
-          </button>
+        <div class="col-md-2">
+          <button class="btnFilter w-100" (click)="search()">Search</button>
         </div>
-        <div class="col">
-          <button class="btn btn-secondary w-100" (click)="resetFilters()">
+        <div class="col-md-2">
+          <button class="btnFilterReset w-100" (click)="resetFilters()">
             Reset
           </button>
         </div>
       </div>
-      <button class="btn btn-success mb-3" (click)="openStudentModal()">
-        Add New Student
-      </button>
+    </div>
+  </div>
+
+  <!-- Entries and Pagination Section (Top) -->
+  <div class="d-flex justify-content-between mb-4 align-items-center">
+    <div>
+      Show entries:
+      <select
+        class="form-control d-inline w-auto ml-2"
+        [(ngModel)]="pageSize"
+        (change)="paginate()"
+      >
+        <option *ngFor="let size of [5, 10, 20, 50, 100]" [value]="size">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+    <ul class="pagination mb-0">
+      <li
+        class="page-item"
+        [class.disabled]="currentPage === 1"
+        (click)="setPage(1)"
+      >
+        <a class="page-link">First</a>
+      </li>
+      <li
+        class="page-item"
+        [class.disabled]="currentPage === 1"
+        (click)="setPage(currentPage - 1)"
+      >
+        <a class="page-link">Previous</a>
+      </li>
+      <li
+        *ngFor="let page of pages"
+        class="page-item"
+        [class.active]="page === currentPage"
+        (click)="setPage(page)"
+      >
+        <a class="page-link">{{ page }}</a>
+      </li>
+      <li
+        class="page-item"
+        [class.disabled]="currentPage === totalPages"
+        (click)="setPage(currentPage + 1)"
+      >
+        <a class="page-link">Next</a>
+      </li>
+      <li
+        class="page-item"
+        [class.disabled]="currentPage === totalPages"
+        (click)="setPage(totalPages)"
+      >
+        <a class="page-link">Last</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Table Section -->
+  <div class="card shadow">
+    <div class="card-body">
       <table class="table table-hover table-striped">
-        <thead>
+        <thead class="table-light">
           <tr>
-            <th (click)="sort('firstName')">Name</th>
-            <th (click)="sort('age')">Age</th>
-            <th (click)="sort('country')">Country</th>
-            <th (click)="sort('gender')">Gender</th>
-            <th (click)="sort('email')">Email</th>
-            <th>Actions</th>
+            <th></th>
+            <th (click)="sort('firstName')" class="sortable-header">
+              Name <i [ngClass]="getSortIcon('firstName')"></i>
+            </th>
+            <th (click)="sort('age')" class="sortable-header">
+              Age <i [ngClass]="getSortIcon('age')"></i>
+            </th>
+            <th (click)="sort('country')" class="sortable-header">
+              Country <i [ngClass]="getSortIcon('country')"></i>
+            </th>
+            <th (click)="sort('gender')" class="sortable-header">
+              Gender <i [ngClass]="getSortIcon('gender')"></i>
+            </th>
+            <th (click)="sort('email')" class="sortable-header">
+              Email <i [ngClass]="getSortIcon('email')"></i>
+            </th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let student of paginatedStudents">
+            <td>
+              <button
+                class="btn btn-link p-0"
+                (click)="openStudentModal(student)"
+                title="Edit"
+              >
+                <i class="bi bi-pencil-fill text-secondary"></i>
+              </button>
+            </td>
             <td>{{ student.firstName + " " + student.lastName }}</td>
             <td>{{ student.age }}</td>
             <td>{{ student.country }}</td>
@@ -67,28 +158,49 @@
             <td>{{ student.email }}</td>
             <td>
               <button
-                class="btn btn-primary btn-sm"
-                (click)="openStudentModal(student)"
-              >
-                Edit
-              </button>
-              <button
-                class="btn btn-danger btn-sm"
+                class="btn btn-link p-0"
                 (click)="deleteStudent(student.id)"
+                title="Delete"
               >
-                Delete
+                <i class="bi bi-trash-fill text-secondary"></i>
               </button>
             </td>
           </tr>
         </tbody>
       </table>
-      <ngb-pagination
-        [collectionSize]="students.length"
-        [(page)]="currentPage"
-        [pageSize]="pageSize"
-        (pageChange)="paginate()"
-        class="d-flex justify-content-center mt-4"
-      ></ngb-pagination>
     </div>
+  </div>
+
+  <!-- Pagination Section (Bottom) -->
+  <div class="d-flex justify-content-between mt-0 mb-10">
+    <div class="justify-content-between">
+      Showing <span class="fw-bolder"> {{ currentPage }}</span> to
+      <span class="fw-bolder"> {{ pageSize }}</span> of
+      <span class="fw-bolder"> {{ pageSize }}</span>
+    </div>
+    <ul class="pagination">
+      <li
+        class="page-item"
+        [class.disabled]="currentPage === 1"
+        (click)="setPage(currentPage - 1)"
+      >
+        <a class="page-link">Previous</a>
+      </li>
+      <li
+        *ngFor="let page of pages"
+        class="page-item"
+        [class.active]="page === currentPage"
+        (click)="setPage(page)"
+      >
+        <a class="page-link">{{ page }}</a>
+      </li>
+      <li
+        class="page-item"
+        [class.disabled]="currentPage === totalPages"
+        (click)="setPage(currentPage + 1)"
+      >
+        <a class="page-link">Next</a>
+      </li>
+    </ul>
   </div>
 </div>

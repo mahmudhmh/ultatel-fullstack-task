@@ -1,21 +1,27 @@
-<div class="container mt-5">
-  <div class="card">
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 27rem">
     <div class="card-body">
-      <h2 class="text-center">Register</h2>
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1OfJviFca_oVMEtI3gdL3BjJIZQ-gDYxopw&s"
+        alt="ultatel-logo"
+        class="img-fluid mb-5"
+        style="height: 80px; width: 320px; margin: 0 auto; display: block"
+      />
+      <h4 class="card-title text-center mb-4">Register</h4>
       <form (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="fullName">Full Name</label>
+        <div class="mb-3">
+          <label for="fullName" class="form-label">Full Name</label>
           <input
             type="text"
             class="form-control"
-            id="name"
+            id="fullName"
             [(ngModel)]="fullName"
             name="fullName"
             required
           />
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
           <input
             type="email"
             class="form-control"
@@ -25,8 +31,8 @@
             required
           />
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
+        <div class="mb-3 position-relative">
+          <label for="password" class="form-label">Password</label>
           <input
             type="password"
             class="form-control"
@@ -34,10 +40,27 @@
             [(ngModel)]="password"
             name="password"
             required
+            (input)="checkPasswordStrength()"
+            (focus)="showTooltip = true"
+            (blur)="showTooltip = false"
           />
+          <div class="tooltip-custom" [class.show]="showTooltip">
+            <div class="password-strength">
+              <div [class]="strengthLevel.toLowerCase()">
+                {{ strengthLevel }}
+              </div>
+            </div>
+            <ul class="password-requirements">
+              <li *ngFor="let req of requirements" [class.valid]="req.isValid">
+                {{ req.text }}
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="confirmPassword">Confirm Password</label>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label"
+            >Confirm Password</label
+          >
           <input
             type="password"
             class="form-control"
@@ -47,11 +70,11 @@
             required
           />
         </div>
-        <button type="submit" class="btn btn-primary btn-block">
-          Register
-        </button>
-        <a routerLink="/login" class="d-block mt-3 text-center">Login</a>
+        <button type="submit" class="btn btn-primary w-100">Register</button>
       </form>
+      <div class="text-center mt-3">
+        <a routerLink="/login">Login</a>
+      </div>
     </div>
   </div>
 </div>
