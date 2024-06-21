@@ -48,7 +48,8 @@
                 }
               ],
               "outputPath": "dist/crud-client/browser",
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/"
             },
             "development": {
               "optimization": false,
