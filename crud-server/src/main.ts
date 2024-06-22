@@ -6,7 +6,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: ['http://localhost:4200', 'http://localhost:5173'],
+    origin: ['http://localhost:4200', 'http://localhost:5173', 'https://ultatel-react-client.vercel.app'],
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   });
